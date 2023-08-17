@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import Card from './card';
 import dhooni from './images/dhooni baba.png'
 import Search from './Search';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -30,20 +30,22 @@ function App() {
     else {
       setSkip(skip - 30)
       setNums(nums - 1)
-      getData();
     }
   }
 
   const NextClick = () => {
     setSkip(skip + 30);
     setNums(nums + 1);
-    getData();
   }
 
   useEffect(() => {
     setApi(`https://dummyjson.com/products?limit=30&skip=${skip}`);
     getData();
   }, [skip]);
+
+  useEffect(() => {
+    getData();
+  }, [api]);
 
   return (
     <Router>
@@ -59,8 +61,8 @@ function App() {
               </div>
             </div>
             <div>
-              <a href="/search" className='bg-red-700 text-2xl text-white rounded-xl pl-3 pr-1 pb-1 ml-10 border-white border-2'>Category</a>
-              <a href="/" className='bg-red-700 text-2xl text-white rounded-xl px-5 pb-1 ml-10 border-white border-2'>Home</a>
+              <Link to="/search" className='bg-red-700 text-2xl text-white rounded-xl pl-3 pr-1 pb-1 ml-10 border-white border-2'>Category</Link>
+              <Link to="/" className='bg-red-700 text-2xl text-white rounded-xl px-5 pb-1 ml-10 border-white border-2'>Home</Link>
             </div>
           </div>
         </div>
