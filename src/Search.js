@@ -4,7 +4,7 @@ import DropdownSelect from "./Dropdownselect.js";
 
 const Search = () => {
     const [products, setProducts] = useState([]);
-    const [type, setType] = useState('smartphones'); // Initialize with a default value
+    const [type, setType] = useState('smartphones');
     const [api, setApi] = useState(`https://dummyjson.com/products/category/${type}`);
     const options = [
         { value: 'motorcycle', label: 'motorcycle' },
@@ -13,7 +13,9 @@ const Search = () => {
         { value: 'skincare', label: 'skincare' },
         { value: 'furniture', label: 'furniture' },
     ];
-
+    const handleOptionChange = (selectedOption) => {
+        setType(selectedOption);
+    };
     const getData = () => {
         fetch(api)
             .then(response => response.json())
@@ -26,13 +28,14 @@ const Search = () => {
     }
 
     useEffect(() => {
-        setApi(`https://dummyjson.com/products/category/${type}`);
-        getData();
-    }, [type]); // Update the products when the type changes, not the products themselves
+        if (api) {
+            getData();
+        }
+    }, [api]);
 
-    const handleOptionChange = (selectedOption) => {
-        setType(selectedOption);
-    };
+    useEffect(() => {
+        setApi(`https://dummyjson.com/products/category/${type}`);
+    }, [type]);
 
     return (
         <div className="Search">
