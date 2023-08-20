@@ -4,7 +4,6 @@ import Card from './card';
 import dhooni from './images/dhooni baba.png'
 import Search from './Search';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import {motion} from 'framer-motion'
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -49,11 +48,7 @@ function App() {
   return (
     <Router>
       <div className='bg-gray-400 border-2 border-black'>
-        <motion.div
-        initial={{y: -250}}
-        animate={{y: 0}}
-        transition={{delay:1}}
-         className='Navbar'>
+        <div className='Navbar'>
           <div className="flex flex-wrap justify-center items-center bg-gradient-to-r from-sky-500 to-indigo-500 border-4 border-black">
             <div className='flex flex-wrap justify-center items-center bg-yellow-200 rounded-full my-3'>
               <div>
@@ -68,7 +63,7 @@ function App() {
               <a href="/" className='bg-red-700 text-2xl text-white rounded-xl px-5 pb-1 ml-10 border-white border-2'>Home</a>
             </div>
           </div>
-        </motion.div>
+        </div>
         <Switch>
           <Route exact path="/">
             <div className='cards'>
@@ -80,11 +75,7 @@ function App() {
                 ))}
               </div>
             </div>
-            <motion.div
-            initial={{opacity:0,x:0}}
-            animate={{opacity:1,x:-10}}
-            transition={{delay:2}}
-            className='Footer'>
+            <div className='Footer'>
               <div className='flex flex-wrap justify-center items-center'>
                 <button
                   className='bg-yellow-400 font-mono font-bold mx-4 my-8 text-5xl rounded-lg'
@@ -110,7 +101,7 @@ function App() {
                   Next
                 </button>
               </div>
-            </motion.div>
+            <div>
           </Route>
           <Route exact path="/search">
             <Search/>
