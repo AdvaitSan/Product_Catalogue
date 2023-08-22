@@ -6,8 +6,8 @@ const Card = ({ title, description, price, discountPercentage, rating, stock, br
     <motion.div
     initial={{opacity:0}}
         animate={{opacity: 1}}
-        transition={{delay:0.5}}
-     className="mx-8 my-2 bg-gray-300 shadow-lg rounded-lg overflow-hidden w-60 h-100 hover:bg-orange-200 drop-shadow-xl" >
+        transition={{delay:0.2}}
+     className="mx-8 my-2 bg-gray-300 shadow-lg rounded-lg overflow-hidden w-60 h-100 drop-shadow-xl hover:bg-orange-200 " >
               <img src={thumbnail} className="w-full h-44 object-cover" />
               <div className="p-4">
                 <h2 className="text-xl font-semibold mb-2">{title}</h2>
