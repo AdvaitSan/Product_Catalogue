@@ -64,7 +64,7 @@ function App() {
             className='flex flex-wrap justify-center items-center bg-yellow-200 rounded-full my-3'>
               <div>
                 <img className="w-20 rounded-full ml-10 border-1 border-orange-70 hover:w-32"
-                 src={ramdev} alt="Image"/>
+                 src={dhooni} alt="Image"/>
               </div>
               <div>
                 <p className='text-4xl font-mono font-bold text-emerald-600 mt-1 ml-10 mr-10'> Dhoonibaba.com</p>
