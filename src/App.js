@@ -64,8 +64,8 @@ function App() {
               </div>
             </div>
             <div>
-              <a href="/search" className='bg-red-700 text-2xl text-white rounded-xl pl-3 pr-1 pb-1 ml-10 border-white border-2'>Category</a>
-              <a href="/" className='bg-red-700 text-2xl text-white rounded-xl px-5 pb-1 ml-10 border-white border-2'>Home</a>
+              <a href="/search" className='transition delay-150 duration-300 ease-in-out bg-red-700 text-2xl text-white rounded-xl pl-3 pr-1 pb-1 ml-10 border-white border-2'>Category</a>
+              <a href="/" className='transition delay-150 duration-300 ease-in-out bg-red-700 text-2xl text-white rounded-xl px-5 pb-1 ml-10 border-white border-2'>Home</a>
             </div>
           </div>
         </motion.div>
