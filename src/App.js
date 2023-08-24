@@ -1,9 +1,11 @@
 import './App.css';
 import { useEffect, useState } from 'react';
 import Card from './card';
-import dhooni from './images/dhooni baba.png'
+import dhooni from './images/dhooni baba.png';
+import ramdev from './images/ramdev.gif';
 import Search from './Search';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -20,54 +22,82 @@ function App() {
       .catch(error => {
         console.error('Error fetching data:', error);
       });
-  }
+  };
 
   const PrevClick = () => {
-    if (nums <= 1 && skip < 1) {
-      setSkip(0);
-      setNums(1);
+    if (nums > 1 || skip > 0) {
+      setSkip(skip - 30);
+      setNums(nums - 1);
+      setApi(`https://dummyjson.com/products?limit=30&skip=${skip - 30}`);
     }
-    else {
-      setSkip(skip - 30)
-      setNums(nums - 1)
-      getData();
-    }
-  }
+  };
 
   const NextClick = () => {
     setSkip(skip + 30);
     setNums(nums + 1);
-    getData();
-  }
+    setApi(`https://dummyjson.com/products?limit=30&skip=${skip + 30}`);
+  };
 
   useEffect(() => {
-    setApi(`https://dummyjson.com/products?limit=30&skip=${skip}`);
     getData();
-  }, [skip]);
+  }, [api]);
 
   return (
     <Router>
       <div className='bg-gray-400 border-2 border-black'>
-        <div className='Navbar'>
-          <div className="flex flex-wrap justify-center items-center bg-gradient-to-r from-sky-500 to-indigo-500 border-4 border-black">
-            <div className='flex flex-wrap justify-center items-center bg-yellow-200 rounded-full my-3'>
+        <motion.div
+          initial={{ y: -250 }}
+          animate={{ y: 0 }}
+          transition={{ delay: 0.3 }}
+          className='Navbar'
+        >
+          <div className='flex flex-wrap justify-center items-center bg-gradient-to-r from-sky-500 to-indigo-500 border-4 border-black'>
+            <motion.div
+              initial={{ x: -850 }}
+              animate={{ x: 0 }}
+              transition={{ delay: 0.7 }}
+              className='flex flex-wrap justify-center items-center bg-yellow-200 rounded-full my-3'
+            >
               <div>
-                <img className="w-20 rounded-full ml-10 border-1 border-orange-700" src={dhooni} alt="Logo" />
+                <img
+                  className='w-20 rounded-full ml-10 border-1 border-orange-70 hover:w-32'
+                  src={ramdev}
+                  alt='Image'
+                />
               </div>
               <div>
-                <p className='text-4xl font-mono font-bold text-emerald-600 mt-1 ml-10 mr-10'> Dhoonibaba.com</p>
+                <p className='text-4xl font-mono font-bold text-emerald-600 mt-1 ml-10 mr-10'>
+                  {' '}
+                  Dhoonibaba.com
+                </p>
               </div>
-            </div>
+            </motion.div>
             <div>
-              <a href="/search" className='bg-red-700 text-2xl text-white rounded-xl pl-3 pr-1 pb-1 ml-10 border-white border-2'>Category</a>
-              <a href="/" className='bg-red-700 text-2xl text-white rounded-xl px-5 pb-1 ml-10 border-white border-2'>Home</a>
+              <motion.div
+                initial={{ x: 850 }}
+                animate={{ x: 0 }}
+                transition={{ delay: 0.7 }}
+              >
+                <Link
+                  to='/search'
+                  className='transition ease-in-out delay-15 hover:-translate-y-1 hover:scale-110 hover:bg-green-300 hover:text-3xl duration-300 bg-red-700 text-2xl text-white rounded-xl pl-3 pr-1 pb-1 ml-10 border-white border-2'
+                >
+                  Category
+                </Link>
+                <Link
+                  to='/'
+                  className='transition ease-in-out delay-15 hover:-translate-y-1 hover:scale-110 hover:bg-green-300 hover:text-3xl duration-300 bg-red-700 text-2xl text-white rounded-xl pl-3 pr-1 pb-1 ml-10 border-white border-2'
+                >
+                  Home
+                </Link>
+              </motion.div>
             </div>
           </div>
-        </div>
+        </motion.div>
         <Switch>
-          <Route exact path="/">
+          <Route exact path='/'>
             <div className='cards'>
-              <div className="flex flex-wrap justify-center items-center h-500 min-screen ">
+              <div className='flex flex-wrap justify-center items-center h-500 min-screen '>
                 {products.map(product => (
                   <div key={product.id}>
                     <Card {...product} />
@@ -75,7 +105,12 @@ function App() {
                 ))}
               </div>
             </div>
-            <div className='Footer'>
+            <motion.div
+              initial={{ opacity: 0, x: 0 }}
+              animate={{ opacity: 1, x: -10 }}
+              transition={{ delay: 2 }}
+              className='Footer'
+            >
               <div className='flex flex-wrap justify-center items-center'>
                 <button
                   className='bg-yellow-400 font-mono font-bold mx-4 my-8 text-5xl rounded-lg'
@@ -101,15 +136,15 @@ function App() {
                   Next
                 </button>
               </div>
-            <div>
+            </motion.div>
           </Route>
-          <Route exact path="/search">
-            <Search/>
+          <Route exact path='/search'>
+            <Search />
           </Route>
         </Switch>
       </div>
     </Router>
-  )
+  );
 }
 
 export default App;
